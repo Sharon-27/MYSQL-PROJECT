@@ -1,0 +1,36 @@
+CAFE CUSTOMER ANALYSIS - EXECUTION ORDER
+==========================================
+
+MySQL 8.0+
+
+Run the scripts in this order:
+
+1. Database/01_Create_Database.sql
+2. Database/02_Create_Tables.sql
+3. Database/04_Constraints.sql
+4. Indexes/Cafe_Indexes.sql
+5. Database/03_Insert_Data.sql
+6. Triggers/Cafe_Triggers.sql
+7. Views/Cafe_Analysis_Views.sql
+8. Stored_Procedures/Cafe_Stored_Procedures.sql
+9. Analysis/01_Customer_Analysis.sql
+10. Analysis/02_Product_Analysis.sql
+11. Analysis/03_Order_Analysis.sql
+12. Analysis/04_Revenue_Analysis.sql
+13. Analysis/05_Advanced_Analysis.sql
+
+WHY THIS ORDER?
+- Tables must exist before constraints.
+- Constraints must exist before transactional data is inserted.
+- Indexes are created before data for the project to demonstrate indexed schema design.
+- Seed data is inserted before the analytical objects are created.
+- Triggers are created after seed data so the initial dataset remains exactly as documented;
+  the triggers then automatically protect/calculate future transactions.
+- Views and procedures depend on the tables and data structure.
+- Analysis queries run last.
+
+NOTE:
+The trigger file includes DROP TRIGGER IF EXISTS and CREATE TRIGGER statements.
+If you want the triggers to participate in seed-data calculations instead, run
+Triggers/Cafe_Triggers.sql before Database/03_Insert_Data.sql and insert order items
+without manually supplied unit_price/total_price values.
